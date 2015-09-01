@@ -1,0 +1,63 @@
+status = 'go'
+tabs = {}
+
+while status == 'go':    
+    tabs['e'] = []
+    tabs['B'] = []
+    tabs['G'] = []
+    tabs['D'] = []
+    tabs['A'] = []
+    tabs['E'] = []
+
+    index = 0
+    while index < 50:
+        notes_used = []
+        multiple_notes = int(input("How many notes to add? "))
+        for i in range(0, multiple_notes):
+            string = input("String? ")
+            fret = input("fret? ")
+
+            if string == 'e':
+                tabs['e'].append(fret)
+            elif string == 'B':
+                tabs['B'].append(fret)
+            elif string == 'G':
+                tabs['G'].append(fret)
+            elif string == 'D':
+                tabs['D'].append(fret)
+            elif string == 'A':
+                tabs['A'].append(fret)
+            elif string == 'E':
+                tabs['E'].append(fret)
+
+            notes_used.append(string)
+
+            #Compare lists
+        match = []
+        not_match = []
+
+        for i in list(tabs.keys()):
+            if i in notes_used:
+                match.append(i)
+            else:
+                not_match.append(i)
+
+        for i in match:
+            tabs[i] += '--'
+        for i in not_match:
+            tabs[i] += '---'
+
+        index += 20
+    e = "".join(tabs['e'])
+    B = "".join(tabs['B'])
+    G = "".join(tabs['G'])
+    D = "".join(tabs['D'])
+    A = "".join(tabs['A'])
+    E = "".join(tabs['E'])
+
+    status = input("Status? ")
+        
+
+
+        
+        
