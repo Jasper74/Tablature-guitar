@@ -1,34 +1,60 @@
+#spacing = raw_input("What should the spacing between notes be? ")
+
+#What I'm thinking of is 8 lines, of which 6 consist of actual tabs and 1 white line indicates the chord of the section
+#and another white line to seperate it from the bars above.
+
+#A list of lists will store the bars and will therefore consist of x * 8 rows
+#Considering there should be a space of at least two '-'s between each note (or 1 if there is a fast succession?) this
+#leaves room for around 40 notes sections.
+
+#The function should repeatedly ask for a user input on the note to be played (and the chord which is used) and skips some
+#spaces each time. There needs to be an option to allow for two notes to be played at the same time (for fingerstyle tabs)
+#and the symbols for techniques should be indicated too. It will work its way through the entire length until it reaches
+#the end after which it saves the whole thing to a list of lists and starts a new unit. It should be a while loop, where I
+#can indicate the end of the tab. At the end it saves the tab to a text file. 
+
+#e------------------------------------------------------------------------------------------------------------------------
+#B------------------------------------------------------------------------------------------------------------------------
+#G------------------------------------------------------------------------------------------------------------------------
+#D------------------------------------------------------------------------------------------------------------------------
+#A------------------------------------------------------------------------------------------------------------------------
+#E------------------------------------------------------------------------------------------------------------------------
+
 status = 'go'
-tabs = {}
+guitar_strings = {}
+tabs = []
+
+#The dictionary gets reset for every block of tabs. The notes are stored in each respective dictionary key representing the 
+#guitar strings. At the end of the 
 
 while status == 'go':    
-    tabs['e'] = []
-    tabs['B'] = []
-    tabs['G'] = []
-    tabs['D'] = []
-    tabs['A'] = []
-    tabs['E'] = []
+    guitar_strings['e'] = []
+    guitar_strings['B'] = []
+    guitar_strings['G'] = []
+    guitar_strings['D'] = []
+    guitar_strings['A'] = []
+    guitar_strings['E'] = []
 
-    index = 0
-    while index < 50:
+    tab_index = 0
+    while tab_index < 50:
         notes_used = []
-        multiple_notes = int(input("How many notes to add? "))
-        for i in range(0, multiple_notes):
-            string = input("String? ")
-            fret = input("fret? ")
-
+        note = raw_input("String and fret? (example: A2 G3) ").split()
+        for i in range(len(note)):
+            string = note[i][0]
+            fret = note[i][1]
+        
             if string == 'e':
-                tabs['e'].append(fret)
+                guitar_strings['e'].append(fret)
             elif string == 'B':
-                tabs['B'].append(fret)
+                guitar_strings['B'].append(fret)
             elif string == 'G':
-                tabs['G'].append(fret)
+                guitar_strings['G'].append(fret)
             elif string == 'D':
-                tabs['D'].append(fret)
+                guitar_strings['D'].append(fret)
             elif string == 'A':
-                tabs['A'].append(fret)
+                guitar_strings['A'].append(fret)
             elif string == 'E':
-                tabs['E'].append(fret)
+                guitar_strings['E'].append(fret)
 
             notes_used.append(string)
 
@@ -36,26 +62,45 @@ while status == 'go':
         match = []
         not_match = []
 
-        for i in list(tabs.keys()):
+        for i in list(guitar_strings.keys()):
             if i in notes_used:
                 match.append(i)
             else:
                 not_match.append(i)
 
         for i in match:
-            tabs[i] += '--'
+            guitar_strings[i] += '--'
         for i in not_match:
-            tabs[i] += '---'
+            guitar_strings[i] += '---'
 
-        index += 20
-    e = "".join(tabs['e'])
-    B = "".join(tabs['B'])
-    G = "".join(tabs['G'])
-    D = "".join(tabs['D'])
-    A = "".join(tabs['A'])
-    E = "".join(tabs['E'])
 
-    status = input("Status? ")
+        tab_index += 2
+
+        print "".join(guitar_strings['e'])
+        print "".join(guitar_strings['B'])
+        print "".join(guitar_strings['G'])
+        print "".join(guitar_strings['D'])
+        print "".join(guitar_strings['A'])
+        print "".join(guitar_strings['E'])
+
+        
+    e = "".join(guitar_strings['e'])
+    B = "".join(guitar_strings['B'])
+    G = "".join(guitar_strings['G'])
+    D = "".join(guitar_strings['D'])
+    A = "".join(guitar_strings['A'])
+    E = "".join(guitar_strings['E'])
+
+    tabs.append([" "*(len(e))])
+    tabs.append(e)
+    tabs.append(B)
+    tabs.append(G)
+    tabs.append(D)
+    tabs.append(A)
+    tabs.append(E)
+    tabs.append([" "*(len(e))])
+
+    status = raw_input("Status? ")
         
 
 
